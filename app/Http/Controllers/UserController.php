@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
-
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+
+/**
+ * @description class UserController
+ * @class UserController
+ * @extends Controller
+ * purpose     :creating login and register api
+ * @since      : 26-06-2021
+ */
 
 class UserController extends Controller
 {
