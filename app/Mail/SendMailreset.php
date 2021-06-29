@@ -30,7 +30,7 @@ class SendMailreset extends Mailable
      */
     public function build()
     {
-        return $this->markdown('Email.PasswordReset')->with([
+        return $this->markdown('Email.passwordReset')->with([
             'token' => $this->token,
             'email' => $this->email
         ]);
