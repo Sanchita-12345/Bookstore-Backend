@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+// Route::get('/', 'FileController@index');
+// Route::resource('images', 'FileController', ['only' => ['store', 'destroy']]);
+
+// Route::get('/', [FileController::class,'index']);
