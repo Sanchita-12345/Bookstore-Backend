@@ -58,15 +58,15 @@ Route::delete('/deleteBook/{id}', [
     FileController::class, 'deleteBook'
 ])->middleware('auth.jwt');
 
-Route::get('/searchBooksByAuthor', [
+Route::get('/searchBooksByAuthor/{author}', [
     FileController::class, 'searchBooksByAuthor'
 ])->middleware('auth.jwt');
 
-Route::get('/searchbooks', [
+Route::get('/searchbooks/{name}', [
     FileController::class, 'searchbooks'
 ])->middleware('auth.jwt');
 
-Route::get('/searchBooksbyPrice', [
+Route::get('/searchBooksbyPrice/{price}', [
     FileController::class, 'searchBooksbyPrice'
 ])->middleware('auth.jwt');
 
