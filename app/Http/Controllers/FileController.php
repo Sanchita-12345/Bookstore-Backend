@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
 use App\Http\Resources\Books as BooksResource;
 use App\Models\Books;
 use App\Models\User;
@@ -11,6 +10,7 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -56,7 +56,7 @@ class FileController extends Controller
         $book->quantity=$request->input('quantity');
         $book->author=$request->input('author');
         $book->description=$request->input('description');
-        $book->file=$request->file('file')->store('apiDocs');
+        $book->file=$request->input('file');
         $book->user_id = auth()->id();
         $book->save();
         return ["result"=>$book];
@@ -102,4 +102,54 @@ class FileController extends Controller
                 'error' => 'Invalid Book id'], 405);
         }
     }
+
+    public function searchBooksByAuthor($author){
+        $books=Books::all();
+        if(User::find($books->user_id=auth()->id())->books){
+             $searchBooks=  Books::where("author","like","%".$author."%")->get();
+             return response()->json(['books' => $searchBooks], 200);
+        }
+        else{
+            return response()->json(['error'=>'no books '],404);
+        }
+    }
+
+    public function searchbooks($name)
+    {
+        $books=Books::all();
+        if(User::find($books->user_id=auth()->id())->books){
+             $searchBooks=  Books::where("name","like","%".$name."%")->get();
+             return response()->json(['books' => $searchBooks], 200);
+        }
+        else{
+            return response()->json(['error'=>'no books '],404);
+        }
+    }
+    public function searchBooksbyPrice($price){
+        $books=Books::all();
+        if(User::find($books->user_id=auth()->id())->books){
+            $searchBooks=Books::where("price",$price)->get();
+            return response()->json(['books'=>$searchBooks],200);
+        }
+    }
+
+    public function sortBooksHighToLow(){
+        $books=Books::all();
+        if(User::find($books->user_id=auth()->id())->books){
+            return Books::orderBy('price','DESC')->get();
+            // return response()->json(['books'=>$returnBooks],200);
+        }
+        else{
+            return response()->json(['error'=>'error'],401);
+        }
+    }
+
+    public function sortBooksLowToHigh(){
+        $books=Books::all();
+        if(User::find($books->user_id=auth()->id())->books){
+           return Books::orderBy('price','ASC')->get();
+            // return response()->json(['books'=>$returnBooks],200);
+        }
+    }
+
 }
