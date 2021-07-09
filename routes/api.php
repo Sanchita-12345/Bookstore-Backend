@@ -57,3 +57,23 @@ Route::put('/updateBook/{id}', [
 Route::delete('/deleteBook/{id}', [
     FileController::class, 'deleteBook'
 ])->middleware('auth.jwt');
+
+Route::get('/searchBooksByAuthor', [
+    FileController::class, 'searchBooksByAuthor'
+])->middleware('auth.jwt');
+
+Route::get('/searchbooks', [
+    FileController::class, 'searchbooks'
+])->middleware('auth.jwt');
+
+Route::get('/searchBooksbyPrice', [
+    FileController::class, 'searchBooksbyPrice'
+])->middleware('auth.jwt');
+
+Route::get('/sortBooksHighToLow', [
+    FileController::class, 'sortBooksHighToLow'
+])->middleware('auth.jwt');
+
+Route::get('/sortBooksLowToHigh', [
+    FileController::class, 'sortBooksLowToHigh'
+])->middleware('auth.jwt');
