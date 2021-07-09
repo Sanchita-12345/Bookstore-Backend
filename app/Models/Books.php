@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Facades\Storage;
+use Tymon\JWTAuth\Contracts\Providers\Storage;
 
 class Books extends Model
 {
@@ -43,4 +44,5 @@ class Books extends Model
     // {
     //     return Storage::disk('s3')->url($this->image);
     // }
+
 }
