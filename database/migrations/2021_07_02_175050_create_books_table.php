@@ -22,6 +22,7 @@ class CreateBooksTable extends Migration
             $table->string('file')->nullable();
             $table->longText('description');
             $table->unsignedBigInteger('user_id');
+            $table->enum('cart', [0, 1])->default(0);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
