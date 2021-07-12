@@ -152,4 +152,11 @@ class FileController extends Controller
         }
     }
 
+    public function cartItem(){
+        $books=Books::all();
+        if(User::find($books->user_id=auth()->id())->books){
+            return Books::whereIn('cart', ['0'])->get();
+        }
+    }
+
 }
