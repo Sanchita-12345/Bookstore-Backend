@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\CustomersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -80,4 +81,16 @@ Route::get('/sortBooksLowToHigh', [
 
 Route::get('/cartItem', [
     FileController::class, 'cartItem'
+])->middleware('auth.jwt');
+
+Route::put('/addToCart/{id}', [
+    FileController::class, 'addToCart'
+])->middleware('auth.jwt');
+
+Route::delete('/removeFromCart/{id}', [
+    FileController::class, 'removeFromCart'
+])->middleware('auth.jwt');
+
+Route::post('customerRegistration', 
+    [CustomersController::class, 'customerRegistration'
 ])->middleware('auth.jwt');
