@@ -94,3 +94,11 @@ Route::delete('/removeFromCart/{id}', [
 Route::post('customerRegistration', 
     [CustomersController::class, 'customerRegistration'
 ])->middleware('auth.jwt');
+
+Route::post('mail',
+    [CustomersController::class,'orderSuccessfull'
+])->middleware('auth.jwt');
+
+Route::get('orderid/{customer_id}',
+    [CustomersController::class,'getOrderID'
+])->middleware('auth.jwt');
