@@ -79,7 +79,7 @@ Route::get('/sortBooksLowToHigh', [
     FileController::class, 'sortBooksLowToHigh'
 ])->middleware('auth.jwt');
 
-Route::get('/cartItem', [
+Route::get('/cart', [
     FileController::class, 'cartItem'
 ])->middleware('auth.jwt');
 
