@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Books as BooksResource;
 use App\Models\Books;
@@ -155,8 +154,25 @@ class FileController extends Controller
     public function cartItem(){
         $books=Books::all();
         if(User::find($books->user_id=auth()->id())->books){
-            return Books::whereIn('cart', ['0'])->get();
+            return Books::whereIn('cart', ['1'])->get();
         }
     }
 
+    public function addToCart(Request $request,$id){
+        $book=Books::findOrFail($id);
+        if($book->user_id==auth()->id()){
+            $book=Books::where('id',$id)
+                ->update(array('cart'=>'1',
+            ));
+            return['updated successfully'];
+        }
+    }
+    public function removeFromCart(Request $request,$id){
+        $book=Books::findOrFail($id);
+        if($book->user_id=auth()->id()){
+            $book=Books::where('id',$id)->update(array('cart'=>'0'));
+            return['removed from cart'];
+        }
+    }
+    
 }
