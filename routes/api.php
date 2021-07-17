@@ -102,3 +102,7 @@ Route::post('mail',
 Route::get('orderid/{customer_id}',
     [CustomersController::class,'getOrderID'
 ])->middleware('auth.jwt');
+
+Route::get('decrementQuantity',
+    [FileController::class,'decrementQuantity'
+])->middleware('auth.jwt');
