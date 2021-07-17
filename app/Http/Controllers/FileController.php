@@ -174,5 +174,12 @@ class FileController extends Controller
             return['removed from cart'];
         }
     }
+    public function decrementQuantity($id){
+        $book=Books::findOrFail($id);
+        if($book->user_id==auth()->id()){
+            $book=Books::where('id',$id)->decrement('quantity');
+            return['book quantity decrement'];
+        }
+    }
     
 }
