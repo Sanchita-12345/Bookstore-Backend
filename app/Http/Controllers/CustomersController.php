@@ -47,6 +47,6 @@ class CustomersController extends Controller
         if($order && $ord){
             $order->notify(new orderSuccessfullNotification($ord->orderNumber));
         }
-        return response()->json(['message'=>'order created successfully','OrderNumber'=>$ord->orderNumber]);
+        return response()->json($ord->orderNumber);
     }
 }
